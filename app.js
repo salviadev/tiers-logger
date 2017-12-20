@@ -1,14 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const bodyParser = require("body-parser");
+const util = require("util");
+const fs = require("fs");
+const path = require("path");
 let app = express();
-app.use(bodyParser.json());
-app.all('*/info', (req, res) => {
-    if (req.body)
-        console.log(req.body);
+app.all('*/tiers/log', (req, res) => {
+    let date = new Date();
+    fs.mkdir('logs', null, (err) => {
+        if (!err || err.code === 'EEXIST') {
+            const fileName = util.format('%s-%d-%s-%s-%s-%s-%s.json', req.method, date.getUTCFullYear(), ((date.getUTCMonth() + 1) + '').padStart(2, '0'), (date.getUTCDate() + '').padStart(2, '0'), (date.getUTCHours() + '').padStart(2, '0'), (date.getUTCMinutes() + '').padStart(2, '0'), (date.getUTCMilliseconds() + '').padStart(3, '0'));
+            const stream = fs.createWriteStream(path.join('logs', fileName));
+            req.pipe(stream);
+        }
+    });
     res.status(200).json({ response: 'I am alive!' });
 });
-app.listen(80, function () {
-    console.log('Server started at port 80.');
+const port = process.env.PORT || 8888;
+app.listen(port, function () {
+    console.log(util.format('Server started at port %d.', port));
 });
