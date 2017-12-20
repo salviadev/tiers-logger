@@ -1,0 +1,29 @@
+{
+  "name": "tiers-logger",
+  "description": "A logger for service tiers",
+  "version": "1.0.0",
+  "author": "Mihai STOIE <mihaistoie@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "latest",
+    "body-parser": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/express": "latest",
+    "@types/body-parser": "latest",
+    "del": "latest",
+    "gulp": "latest",
+    "gulp-tslint": "latest",
+    "gulp-typescript": "latest",
+    "merge2": "latest",
+    "mocha": "latest",
+    "source-map-support": "latest",
+    "tslint": "latest",
+    "typescript": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salviadev/tiers-logger"
+  }
+}
